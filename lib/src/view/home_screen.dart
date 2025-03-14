@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movieapp/src/view/widgets/search_field.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -15,16 +16,13 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: 
-      Text(
-        "Movie App", 
-        style: TextStyle(
-          color: Colors.black,
-          fontWeight: FontWeight.bold,
-          )
-      )),
-      body: Center(
-        child: Text('Hello World!'),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 32, horizontal: 16),
+        child: Column(
+          children: [
+            SearchField(hintText: 'Movies, Dramas and other',)
+          ],
+        ),
       ),
     );
   }
