@@ -16,6 +16,10 @@ class DetailVM extends ChangeNotifier {
     fetchMovieData(movieId);
   }
 
+  void onBackTap(context) {
+     Navigator.pop(context);
+   }
+
   void _setMovieMain(ApiResponse<MovieModel> response) {
     movieData = response;
     notifyListeners();

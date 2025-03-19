@@ -4,9 +4,11 @@ class DetailBackdrop extends StatelessWidget {
   const DetailBackdrop({
     super.key, 
     required this.imageUrl, 
+    required this.onBack, 
   });
 
   final String? imageUrl;
+  final void Function() onBack;
 
   @override
   Widget build(BuildContext context) {
@@ -34,9 +36,7 @@ class DetailBackdrop extends StatelessWidget {
         ),
         SafeArea(
           child: GestureDetector(
-            onTap: () => {
-              Navigator.pop(context)
-            },
+            onTap: onBack,
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: ClipRRect(

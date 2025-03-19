@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:movie_addict/src/utils/convert_munites.dart';
+import 'package:movie_addict/src/utils/convert_minutes.dart';
 import 'package:movie_addict/src/model/movie_model.dart';
 import 'package:movie_addict/src/view/widgets/category_card.dart';
 import 'package:movie_addict/src/view/widgets/detail_backdrop.dart';
@@ -24,7 +24,8 @@ class DetailScreen extends StatelessWidget {
               child: Column(
                 children: [
                   DetailBackdrop(
-                    imageUrl: movieData?.posterPath
+                    imageUrl: movieData?.posterPath,
+                    onBack: () => viewModel.onBackTap(context),
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 16),
