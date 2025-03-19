@@ -1,0 +1,1 @@
+enum ApiStatus { standby, loading, completed, error }
