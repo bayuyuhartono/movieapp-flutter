@@ -1,4 +1,4 @@
-package com.example.movie_addict
+package com.bayuyuhartono.movieaddict
 
 import io.flutter.embedding.android.FlutterActivity
 
