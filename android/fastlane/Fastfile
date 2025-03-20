@@ -7,7 +7,7 @@ platform :android do
     sh("flutter build appbundle --release")
     upload_to_play_store(
       track: "beta",
-      aab: "android/app/build/outputs/bundle/release/app-release.aab",
+      aab: "build/app/outputs/bundle/release/app-release.aab",
       json_key_data: ENV["GOOGLE_PLAY_KEY"],
       package_name: "com.bayuyuhartono.movieaddict"
     )
@@ -19,7 +19,7 @@ platform :android do
     sh("flutter build apk --release")
     upload_to_play_store(
       track: "internal",
-      apk: "android/app/build/outputs/flutter-apk/app-release.apk",
+      apk: "build/app/outputs/bundle/release/app-release.apk",
       json_key_data: ENV["GOOGLE_PLAY_KEY"],
       package_name: "com.bayuyuhartono.movieaddict"
     )
