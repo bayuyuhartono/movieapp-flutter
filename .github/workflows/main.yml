@@ -40,11 +40,11 @@ jobs:
       - name: Install dependencies
         run: flutter pub get
 
-      # - name: Build APK
-      #   run: flutter build apk --release
+      - name: Build APK
+        run: flutter build apk --release
       
-      # - name: Build AAB
-      #   run: flutter build appbundle --release
+      - name: Build AAB
+        run: flutter build appbundle --release
 
       - name: Setup Ruby and Fastlane
         uses: ruby/setup-ruby@v1
