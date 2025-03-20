@@ -15,6 +15,13 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+    
+      - name: Setup Gradle Wrapper
+        run: |
+          cd android
+          chmod +x gradlew
       
       - name: Create key.properties file
         run: |
