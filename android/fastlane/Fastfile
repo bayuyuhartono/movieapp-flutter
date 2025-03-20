@@ -8,7 +8,7 @@ platform :android do
     upload_to_play_store(
       track: "beta",
       aab: "build/app/outputs/bundle/release/app-release.aab",
-      json_key_data: ENV["GOOGLE_PLAY_KEY"],
+      json_key: "android/fastlane/google_play_key.json",
       package_name: "com.bayuyuhartono.movieaddict"
     )
   end
@@ -20,7 +20,7 @@ platform :android do
     upload_to_play_store(
       track: "internal",
       apk: "build/app/outputs/bundle/release/app-release.apk",
-      json_key_data: ENV["GOOGLE_PLAY_KEY"],
+      json_key: "android/fastlane/google_play_key.json",
       package_name: "com.bayuyuhartono.movieaddict"
     )
   end
