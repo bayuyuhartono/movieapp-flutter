@@ -3,23 +3,25 @@ default_platform(:android)
 platform :android do
   desc "Build and upload to Google Play Beta"
   lane :beta do
-    gradle(task: "clean assembleRelease")
+    gradle(task: "clean")
+    sh("flutter build appbundle --release")
     upload_to_play_store(
       track: "beta",
-      aab: "app/build/outputs/bundle/release/app-release.aab",
+      aab: "android/app/build/outputs/bundle/release/app-release.aab",
       json_key_data: ENV["GOOGLE_PLAY_KEY"],
-      package_name: "com.example.yourapp"
+      package_name: "com.bayuyuhartono.movieaddict"
     )
   end
 
   desc "Build APK for internal testing"
   lane :internal do
-    gradle(task: "clean assembleRelease")
+    gradle(task: "clean")
+    sh("flutter build apk --release")
     upload_to_play_store(
       track: "internal",
-      apk: "app/build/outputs/flutter-apk/app-release.apk",
+      apk: "android/app/build/outputs/flutter-apk/app-release.apk",
       json_key_data: ENV["GOOGLE_PLAY_KEY"],
-      package_name: "com.example.yourapp"
+      package_name: "com.bayuyuhartono.movieaddict"
     )
   end
 end
