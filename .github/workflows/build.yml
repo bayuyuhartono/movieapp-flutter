@@ -54,4 +54,4 @@ jobs:
         cd android
         fastlane deploy_firebase
       env:
-        GOOGLE_PLAY_KEY: ${{ secrets.FIREBASE_APP_ID }}
+        FIREBASE_APP_ID: ${{ secrets.FIREBASE_APP_ID }}
