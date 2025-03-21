@@ -4,13 +4,17 @@ platform :android do
   desc "Build APK for internal testing"
   lane :internal do
     sh("flutter build appbundle --release")
+
     upload_to_play_store(
-      track: "internal",
+      json_key: "android/fastlane/google_play_key.json",
       version_name: "MovieAddict",
-      aab: "../build/app/outputs/bundle/release/app-release.aab",
-      json_key: "fastlane/google_play_key.json",
       package_name: "com.bayuyuhartono.movieaddict",
-      release_status: "completed"
+      aab: "build/app/outputs/bundle/release/app-release.aab",
+      track: "internal",
+      skip_upload_metadata: true,
+      skip_upload_images: true,
+      skip_upload_screenshots: true,
+      release_status: 'draft'
     )
   end
 end
