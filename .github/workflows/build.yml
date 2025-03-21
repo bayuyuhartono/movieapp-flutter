@@ -32,15 +32,26 @@ jobs:
         echo "keyPassword=${{ secrets.KEY_PASSWORD }}" >> android/key.properties
         echo "keyAlias=${{ secrets.KEY_ALIAS }}" >> android/key.properties
 
-    - name: Build AAB
-      run: flutter build appbundle --release
+    # - name: Build AAB
+    #   run: flutter build appbundle --release
 
-    - name: Set up Fastlane
-      run: echo "${{ secrets.GOOGLE_PLAY_KEY }}" | base64 --decode > android/fastlane/google_play_api.json
+    # - name: Set up google play api
+    #   run: echo "${{ secrets.GOOGLE_PLAY_KEY }}" | base64 --decode > android/fastlane/google_play_api.json
 
-    - name: Deploy to Play Store Internal Testing
+    # - name: Deploy to Play Store Internal Testing
+    #   run: |
+    #     cd android
+    #     fastlane deploy_internal
+
+    - name: Build APK release
+      run: flutter build apk --release
+    
+    - name: Set up firebase service account
+      run: echo "${{ secrets.FIREBASE_SERVICE_ACCOUNT }}" | base64 --decode > android/fastlane/firebase_service_account.json
+
+    - name: Deploy to Firebase App Distribution
       run: |
         cd android
-        fastlane deploy_internal
+        fastlane deploy_firebase
       env:
-        GOOGLE_PLAY_KEY: ${{ secrets.GOOGLE_PLAY_KEY }}
+        GOOGLE_PLAY_KEY: ${{ secrets.FIREBASE_APP_ID }}

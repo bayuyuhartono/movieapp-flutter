@@ -43,4 +43,5 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
-/android/fastlane/google_play_api.json
+google_play_api.json
+firebase_service_account.json

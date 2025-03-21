@@ -1,9 +1,21 @@
 default_platform(:android)
 
 platform :android do
+
+  desc "Deploy apk release to Firebase App Distribution"
+  lane :deploy_firebase do
+    sh("flutter build apk --release")
+    firebase_app_distribution(
+      app: ENV["FIREBASE_APP_ID"],
+      apk_path: "../build/app/outputs/apk/release/app-release.apk",
+      service_credentials_file: "fastlane/firebase_service_account.json",
+      groups: "QA",
+      release_notes: "New build with bug fixes 🚀",
+    )
+  end
+
   desc "Deploy internal test to Play Store"
   lane :deploy_internal do
-    # gradle(task: "bundleRelease")
     sh("flutter build appbundle --release")
     upload_to_play_store(
       track: "internal",
