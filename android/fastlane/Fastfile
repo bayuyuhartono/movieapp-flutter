@@ -1,25 +1,16 @@
 default_platform(:android)
 
 platform :android do
-  desc "Build and upload to Google Play Beta"
-  lane :beta do
-    sh("flutter build appbundle --release")
-    upload_to_play_store(
-      track: "beta",
-      aab: "build/app/outputs/bundle/release/app-release.aab",
-      json_key: "android/fastlane/google_play_key.json",
-      package_name: "com.bayuyuhartono.movieaddict"
-    )
-  end
-
   desc "Build APK for internal testing"
   lane :internal do
-    sh("flutter build apk --release")
+    sh("flutter build appbundle --release")
     upload_to_play_store(
       track: "internal",
-      apk: "build/app/outputs/bundle/release/app-release.apk",
-      json_key: "android/fastlane/google_play_key.json",
-      package_name: "com.bayuyuhartono.movieaddict"
+      version_name: "MovieAddict",
+      aab: "../build/app/outputs/bundle/release/app-release.aab",
+      json_key: "../android/fastlane/google_play_key.json",
+      package_name: "com.bayuyuhartono.movieaddict",
+      release_status: "completed"
     )
   end
 end
