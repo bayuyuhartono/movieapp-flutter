@@ -21,7 +21,7 @@ For _fastlane_ installation instructions, see [Installing _fastlane_](https://do
 [bundle exec] fastlane android internal
 ```
 
-Build APK for internal testing
+Deploy a new version to the Google Play Internal track
 
 ----
 
