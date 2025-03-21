@@ -1,44 +1,15 @@
-# default_platform(:android)
-
-# platform :android do
-#   desc "Build APK for internal testing"
-#   lane :internal do
-#     sh("flutter build appbundle --release")
-
-#     upload_to_play_store(
-#       json_key: "android/fastlane/google_play_key.json",
-#       version_name: "MovieAddict",
-#       package_name: "com.bayuyuhartono.movieaddict",
-#       aab: "build/app/outputs/bundle/release/app-release.aab",
-#       track: "internal",
-#       skip_upload_metadata: true,
-#       skip_upload_images: true,
-#       skip_upload_screenshots: true,
-#       release_status: 'draft'
-#     )
-#   end
-# end
-
-
-# fastlane/Fastfile
+default_platform(:android)
 
 platform :android do
-  desc "Deploy a new version to the Google Play Internal track"
-  lane :internal do
-    gradle(
-      task: 'bundleRelease'
-    )
-
+  desc "Deploy internal test to Play Store"
+  lane :deploy_internal do
+    gradle(task: "bundleRelease") # Build AAB
     upload_to_play_store(
-      track: 'internal',
+      track: "internal",
+      aab: "app/build/outputs/bundle/release/app-release.aab",
+      json_key: "fastlane/google_play_api.json",
       version_name: "MovieAddict",
-      json_key: "android/fastlane/google_play_key.json",
-      aab: "build/app/outputs/bundle/release/app-release.aab",
-      package_name: "com.bayuyuhartono.movieaddict",
-      release_status: 'draft',
-      skip_upload_metadata: true,
-      skip_upload_images: true,
-      skip_upload_screenshots: true,
+      release_status: "draft",
     )
   end
 end

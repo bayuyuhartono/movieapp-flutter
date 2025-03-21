@@ -1,51 +1,46 @@
-name: Deploy Flutter App to Google Play Internal Testing
+name: Deploy Flutter App to Play Store (Internal Test)
 
 on:
   push:
     branches:
-      - cicd-setup
+      - main
 
 jobs:
-  deploy:
+  build:
+    name: Build & Deploy
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v3
+    - name: Checkout repository
+      uses: actions/checkout@v3
 
-      - name: Create key.properties file
-        run: |
-          echo "keyAlias=${{ secrets.KEY_ALIAS }}" > android/key.properties
-          echo "keyPassword=${{ secrets.KEY_PASSWORD }}" >> android/key.properties
-          echo "storeFile=${{ github.workspace }}/android/app/keystore.jks" >> android/key.properties
-          echo "storePassword=${{ secrets.KEYSTORE_PASSWORD }}" >> android/key.properties
+    - name: Setup Flutter
+      uses: subosito/flutter-action@v2
+      with:
+        flutter-version: 3.x  # Change to your Flutter version
 
-      - name: Decode and save keystore file
-        run: |
-          echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 --decode > android/app/keystore.jks
-      
-      - name: Create Google Play API Key
-        run: echo '${{ secrets.GOOGLE_PLAY_KEY }}' > android/fastlane/google_play_key.json
+    - name: Install dependencies
+      run: flutter pub get
 
-      - uses: actions/setup-java@v3
-        with:
-          distribution: 'adopt'
-          java-version: '17'
+    - name: Decode Keystore
+      run: echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 --decode > android/app/keystore.jks
 
-      - uses: subosito/flutter-action@v2
-        with:
-          flutter-version: '3.x'
-      - run: flutter pub get
+    - name: Set up Gradle properties
+      run: |
+        echo "storeFile=keystore.jks" >> android/key.properties
+        echo "storePassword=${{ secrets.KEYSTORE_PASSWORD }}" >> android/key.properties
+        echo "keyPassword=${{ secrets.KEY_PASSWORD }}" >> android/key.properties
+        echo "keyAlias=${{ secrets.KEY_ALIAS }}" >> android/key.properties
 
-      - run: flutter build appbundle --release
-      
-      - name: Setup Fastlane
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: '3.0'
-          bundler-cache: true
+    - name: Build AAB
+      run: flutter build appbundle --release
 
-      - run: bundle install
-      
-      - name: Deploy to Google Play Internal Testing
-        run: bundle exec fastlane android internal
-        env:
-          GOOGLE_PLAY_KEY: ${{ secrets.GOOGLE_PLAY_KEY }}
+    - name: Set up Fastlane
+      run: echo "${{ secrets.GOOGLE_PLAY_KEY }}" | base64 --decode > android/fastlane/google_play_api.json
+
+    - name: Deploy to Play Store Internal Testing
+      run: |
+        cd android
+        fastlane deploy_internal
+      env:
+        GOOGLE_PLAY_KEY: ${{ secrets.GOOGLE_PLAY_KEY }}
