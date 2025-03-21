@@ -12,9 +12,6 @@ jobs:
 
     steps:
 
-    - name: Ensure correct permissions
-      run: chmod +x android/gradlew
-
     - name: Checkout repository
       uses: actions/checkout@v3
 
@@ -41,6 +38,9 @@ jobs:
 
     - name: Set up Fastlane
       run: echo "${{ secrets.GOOGLE_PLAY_KEY }}" | base64 --decode > android/fastlane/google_play_api.json
+    
+    - name: Ensure correct permissions
+      run: chmod +x android/gradlew
 
     - name: Deploy to Play Store Internal Testing
       run: |
