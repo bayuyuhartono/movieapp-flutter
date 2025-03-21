@@ -49,12 +49,6 @@ jobs:
     - name: Set up firebase service account
       run: echo "${{ secrets.FIREBASE_SERVICE_ACCOUNT }}" | base64 --decode > android/fastlane/firebase_service_account.json
 
-    - name: Set up Ruby and Bundler
-      run: |
-        sudo apt-get install -y ruby-full # Install Ruby if missing
-        gem install bundler
-        cd android && bundle install
-
     - name: Install Fastlane Plugins
       run: |
         cd android && bundle exec fastlane add_plugin firebase_app_distribution
