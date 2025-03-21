@@ -8,7 +8,7 @@ platform :android do
       track: "internal",
       version_name: "MovieAddict",
       aab: "../build/app/outputs/bundle/release/app-release.aab",
-      json_key: "../android/fastlane/google_play_key.json",
+      json_key: "android/fastlane/google_play_key.json",
       package_name: "com.bayuyuhartono.movieaddict",
       release_status: "completed"
     )
