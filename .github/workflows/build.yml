@@ -11,7 +11,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-
     - name: Checkout repository
       uses: actions/checkout@v3
 
@@ -34,13 +33,10 @@ jobs:
         echo "keyAlias=${{ secrets.KEY_ALIAS }}" >> android/key.properties
 
     - name: Build AAB
-      run: flutter build appbundle --release --build-dir=build
+      run: flutter build appbundle --release
 
     - name: Set up Fastlane
       run: echo "${{ secrets.GOOGLE_PLAY_KEY }}" | base64 --decode > android/fastlane/google_play_api.json
-    
-    - name: Ensure correct permissions
-      run: chmod +x android/gradlew
 
     - name: Deploy to Play Store Internal Testing
       run: |
