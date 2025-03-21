@@ -56,6 +56,9 @@ jobs:
         run: bundle install
         working-directory: android
 
+      - name: Make Gradle Executable
+        run: chmod +x android/gradlew
+
       - name: Run Fastlane
         run: bundle exec fastlane android beta
         working-directory: android

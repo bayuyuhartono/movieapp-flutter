@@ -3,10 +3,11 @@ default_platform(:android)
 platform :android do
   desc "Build and upload to Google Play Beta"
   lane :beta do
-    gradle(task: "clean assembleRelease")
+    gradle(task: "clean")
+    gradle(task: "bundleRelease") # Build AAB
     upload_to_play_store(
       track: "beta",
-      aab: "build/app/outputs/bundle/release/app-release.aab",
+      aab: "android/app/build/outputs/bundle/release/app-release.aab",
       json_key: "android/fastlane/google_play_key.json",
       package_name: "com.bayuyuhartono.movieaddict"
     )
@@ -14,10 +15,11 @@ platform :android do
 
   desc "Build APK for internal testing"
   lane :internal do
-    gradle(task: "clean assembleRelease")
+    gradle(task: "clean")
+    gradle(task: "assembleRelease") # Build APK
     upload_to_play_store(
       track: "internal",
-      apk: "build/app/outputs/bundle/release/app-release.apk",
+      apk: "android/app/build/outputs/apk/release/app-release.apk",
       json_key: "android/fastlane/google_play_key.json",
       package_name: "com.bayuyuhartono.movieaddict"
     )
