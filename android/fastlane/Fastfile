@@ -3,7 +3,7 @@ default_platform(:android)
 platform :android do
   desc "Deploy internal test to Play Store"
   lane :deploy_internal do
-    gradle(task: "bundleRelease") # Build AAB
+    gradle(task: "bundleRelease")
     upload_to_play_store(
       track: "internal",
       aab: "../build/app/outputs/bundle/release/app-release.aab",
