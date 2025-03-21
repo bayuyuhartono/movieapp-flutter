@@ -3,7 +3,7 @@ name: Deploy Flutter App to Play Store (Internal Test)
 on:
   push:
     branches:
-      - main
+      - cicd-setup
 
 jobs:
   build:
