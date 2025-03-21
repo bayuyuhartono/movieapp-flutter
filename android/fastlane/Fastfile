@@ -18,7 +18,7 @@ platform :android do
     gradle(task: "assembleRelease") # Build APK
     upload_to_play_store(
       track: "internal",
-      apk: "build/app/outputs/bundle/release/app-release.apk"
+      apk: "build/app/outputs/bundle/release/app-release.apk",
       json_key: "android/fastlane/google_play_key.json",
       package_name: "com.bayuyuhartono.movieaddict"
     )
