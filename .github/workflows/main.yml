@@ -46,8 +46,8 @@ jobs:
       # - name: Build AAB
       #   run: flutter build appbundle --release
 
-      - name: Debug Output Files
-        run: ls -R build/app/outputs/bundle/release/
+      # - name: Debug Output Files
+      #   run: ls -R build/app/outputs/bundle/release/
 
       - name: Setup Ruby and Fastlane
         uses: ruby/setup-ruby@v1
