@@ -6,7 +6,7 @@ platform :android do
     gradle(task: "bundleRelease") # Build AAB
     upload_to_play_store(
       track: "internal",
-      aab: "../build/outputs/bundle/release/app-release.aab",
+      aab: "../build/app/outputs/bundle/release/app-release.aab",
       json_key: "fastlane/google_play_api.json",
       version_name: "MovieAddict",
       release_status: "draft",
