@@ -14,8 +14,7 @@ platform :android do
 
   desc "Build APK for internal testing"
   lane :internal do
-    gradle(task: "clean")
-    gradle(task: "assembleRelease") # Build APK
+    sh("flutter build apk --release")
     upload_to_play_store(
       track: "internal",
       apk: "build/app/outputs/bundle/release/app-release.apk",
