@@ -55,10 +55,14 @@ jobs:
     #     gem install bundler
     #     cd android && bundle install
 
-    - name: Install Fastlane Plugins
-      run: |
-        cd android
-        fastlane add_plugin firebase_app_distribution
+    - name: Setup Ruby and Fastlane
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: '3.0' # or your ruby version
+        bundler-cache: true # runs 'bundle install' and caches gems
+
+    - name: Install Fastlane
+      run: gem install fastlane
 
     # - name: Deploy to Firebase App Distribution
     #   run: |
