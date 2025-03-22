@@ -9,7 +9,6 @@ on:
 jobs:
   deploy_internal:
     if: github.ref == 'refs/heads/release/playstore'
-    name: Build & Deploy
     runs-on: ubuntu-latest
 
     steps:
@@ -47,7 +46,6 @@ jobs:
 
   deploy_appdistribution:
     if: ${{ github.ref != 'refs/heads/release/playstore' && startsWith(github.event.head_commit.message, 'ticket-') }}
-    name: Build & Deploy
     runs-on: ubuntu-latest
 
     steps:
