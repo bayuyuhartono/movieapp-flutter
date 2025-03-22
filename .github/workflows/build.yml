@@ -45,7 +45,7 @@ jobs:
         fastlane deploy_internal
 
   deploy_appdistribution:
-    if: ${{ github.ref != 'refs/heads/release/playstore' && startsWith(github.event.head_commit.message, 'ticket-') }}
+    if: ${{ github.ref != 'refs/heads/release/playstore' && startsWith(trim(github.event.head_commit.message), 'ticket-') }}
     runs-on: ubuntu-latest
 
     steps:
