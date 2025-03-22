@@ -43,19 +43,26 @@ jobs:
     #     cd android
     #     fastlane deploy_internal
 
-    - name: Build APK release
-      run: flutter build apk --release
+    # - name: Build APK release
+    #   run: flutter build apk --release
     
-    - name: Set up firebase service account
-      run: echo "${{ secrets.FIREBASE_SERVICE_ACCOUNT }}" | base64 --decode > android/fastlane/firebase_service_account.json
+    # - name: Set up firebase service account
+    #   run: echo "${{ secrets.FIREBASE_SERVICE_ACCOUNT }}" | base64 --decode > android/fastlane/firebase_service_account.json
+
+    - name: Setup Ruby and Bundler
+      run: |
+        sudo apt-get install -y ruby-full
+        gem install bundler
+        cd android && bundle install
 
     - name: Install Fastlane Plugins
       run: |
-        cd android && bundle exec fastlane add_plugin firebase_app_distribution
-
-    - name: Deploy to Firebase App Distribution
-      run: |
         cd android
-        fastlane deploy_firebase
-      env:
-        FIREBASE_APP_ID: ${{ secrets.FIREBASE_APP_ID }}
+        bundle exec fastlane add_plugin firebase_app_distribution
+
+    # - name: Deploy to Firebase App Distribution
+    #   run: |
+    #     cd android
+    #     fastlane deploy_firebase
+    #   env:
+    #     FIREBASE_APP_ID: ${{ secrets.FIREBASE_APP_ID }}
