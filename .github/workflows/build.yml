@@ -39,6 +39,15 @@ jobs:
     - name: Set up google play api
       run: echo "${{ secrets.GOOGLE_PLAY_KEY }}" | base64 --decode > android/fastlane/google_play_api.json
 
+    - name: Setup Ruby and Fastlane
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: '3.0'
+        bundler-cache: true
+
+    - name: Install Fastlane
+      run: gem install fastlane
+
     - name: Deploy to Play Store Internal Testing
       run: |
         cd android
