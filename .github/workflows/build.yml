@@ -2,10 +2,13 @@ name: Deploy Flutter Apps
 
 on:
   push:
+    branches:
+      - release/playstore
+      - '*'
 
 jobs:
   deploy_internal:
-    if: contains(github.event.head_commit.message, '[release-playstore]')
+    if: github.ref == 'refs/heads/release/playstore'
     name: Build & Deploy
     runs-on: ubuntu-latest
 
@@ -43,7 +46,7 @@ jobs:
         fastlane deploy_internal
 
   deploy_appdistribution:
-    if: startsWith(github.event.head_commit.message, 'ticket-') && !contains(github.event.head_commit.message, '[release-playstore]')
+    if: ${{ github.ref != 'refs/heads/release/playstore' && startsWith(github.event.head_commit.message, 'ticket-') }}
     name: Build & Deploy
     runs-on: ubuntu-latest
 
