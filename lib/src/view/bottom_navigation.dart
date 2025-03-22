@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movie_addict/src/view/home_screen.dart';
+import 'package:movie_addict/src/view/profile_screen.dart';
 import 'package:movie_addict/src/view/search_screen.dart';
 
 class BottomNavigation extends StatefulWidget {
@@ -14,7 +15,7 @@ class BottomNavigationState extends State<BottomNavigation> {
   static final List<Widget> _widgetOptions = <Widget>[
     HomeScreen(),
     SearchScreen(),
-    const Text('Page Screen'),
+    ProfileScreen(),
   ];
 
   void _onItemTapped(int index) {
