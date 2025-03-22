@@ -14,7 +14,7 @@ class BottomNavigationState extends State<BottomNavigation> {
   static final List<Widget> _widgetOptions = <Widget>[
     HomeScreen(),
     SearchScreen(),
-    const Text('Index 2: School'),
+    const Text('Page Screen'),
   ];
 
   void _onItemTapped(int index) {
