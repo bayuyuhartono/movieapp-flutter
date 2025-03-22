@@ -19,8 +19,8 @@ jobs:
       with:
         flutter-version: 3.x  # Change to your Flutter version
 
-    - name: Install dependencies
-      run: flutter pub get
+    # - name: Install dependencies
+    #   run: flutter pub get
 
     - name: Decode Keystore
       run: echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 --decode > android/app/keystore.jks
@@ -49,11 +49,11 @@ jobs:
     # - name: Set up firebase service account
     #   run: echo "${{ secrets.FIREBASE_SERVICE_ACCOUNT }}" | base64 --decode > android/fastlane/firebase_service_account.json
 
-    - name: Setup Ruby and Bundler
-      run: |
-        sudo apt-get install -y ruby-full
-        gem install bundler
-        cd android && bundle install
+    # - name: Setup Ruby and Bundler
+    #   run: |
+    #     sudo apt-get install -y ruby-full
+    #     gem install bundler
+    #     cd android && bundle install
 
     - name: Install Fastlane Plugins
       run: |
