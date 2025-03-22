@@ -2,6 +2,12 @@ name: Deploy Flutter Apps
 
 on:
   push:
+    branches:
+        - release/playstore
+        - '*'
+  pull_request:
+    branches:
+      - release/playstore
 
 jobs:
   deploy_internal:
